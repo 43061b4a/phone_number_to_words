@@ -31,8 +31,9 @@ class TrieTest(unittest.TestCase):
         self.trie.insert('aposematic')
         self.trie.insert('apoplectic')
         self.trie.insert('appendix')
-        self.assertEqual(self.trie.starts_with('app'), [
-            'apple', 'appreciate', 'appendix'])
+        result = self.trie.starts_with('app')
+        for v in ['apple', 'appreciate', 'appendix']:
+            self.assertIn(v, result)
 
     def test_starts_with_self(self):
         self.trie.insert('app')
