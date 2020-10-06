@@ -1,4 +1,5 @@
 import unittest
+
 from trie import PrefixTree
 
 
@@ -31,7 +32,7 @@ class TrieTest(unittest.TestCase):
         self.trie.insert('apoplectic')
         self.trie.insert('appendix')
         self.assertEqual(self.trie.starts_with('app'), [
-                         'apple', 'appreciate', 'appendix'])
+            'apple', 'appreciate', 'appendix'])
 
     def test_starts_with_self(self):
         self.trie.insert('app')
@@ -48,12 +49,13 @@ class TrieTest(unittest.TestCase):
         self.assertEqual(self.trie.starts_with(''), [])
 
     def test_starts_with_empty_returns_all_words(self):
-        self.trie.insert('bad')
-        self.trie.insert('bat')
-        self.trie.insert('cat')
-        self.trie.insert('cage')
-        self.assertListEqual(self.trie.starts_with(
-            ''), ['bad', 'bat', 'cat', 'cage'])
+        values = ['bad', 'bat', 'cat', 'cage']
+        for v in values:
+            self.trie.insert(v)
+
+        result = self.trie.starts_with('')
+        for v in values:
+            self.assertIn(v, result)
 
 
 if __name__ == '__main__':
