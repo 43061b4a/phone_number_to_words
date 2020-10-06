@@ -9,7 +9,7 @@ class TrieTest(unittest.TestCase):
 
     def test_basic_functionality(self):
         result = self.converter.number_to_valid_phone_words('228')
-        self.assertEqual(result, ['abt', 'act', 'bat', 'cat'])
+        self.assertListEqual(result, ['abt', 'act', 'bat', 'cat'])
 
     def test_more_basic_functionality(self):
         result = self.converter.number_to_valid_phone_words('496')
