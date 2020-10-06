@@ -52,7 +52,7 @@ class TrieTest(unittest.TestCase):
         self.trie.insert('bat')
         self.trie.insert('cat')
         self.trie.insert('cage')
-        self.assertEqual(self.trie.starts_with(
+        self.assertListEqual(self.trie.starts_with(
             ''), ['bad', 'bat', 'cat', 'cage'])
 
 
