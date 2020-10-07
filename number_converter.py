@@ -17,19 +17,22 @@ class NumberConverter(object):
         if '1' in num or '0' in num:
             raise Exception('Numbers with 1 and 0 are currently not supported.')
 
+        # 1: Find all words of length equivalent to given string that can be formed
         words = []
         for prefix in self.num_to_chars(num[0]):
             words.extend(self.trie.starts_with(prefix, len(num)))
 
+        # 2: Convert words to number equivalents eg 'cat' -> '228'
         possible_words = []
         for word in words:
             converted_num = self.words_to_nums(word)
+            # 3: We add this word to results if this is equivalent to given number
             if num == converted_num:
                 possible_words.append(word)
         return possible_words
 
-    @lru_cache(maxsize=10)
-    def num_to_chars(self, num):
+    @staticmethod
+    def num_to_chars(num):
         keymap = {'2': ['a', 'b', 'c'],
                   '3': ['d', 'e', 'f'],
                   '4': ['g', 'h', 'i'],
@@ -38,7 +41,7 @@ class NumberConverter(object):
                   '7': ['p', 'q', 'r', 's'],
                   '8': ['t', 'u', 'v'],
                   '9': ['w', 'x', 'y', 'z']}
-        return keymap[num]
+        return keymap[num] if num in keymap else None
 
     @lru_cache(maxsize=10000)
     def words_to_nums(self, word):
